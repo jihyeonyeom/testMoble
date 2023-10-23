@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Chart</title>
+    <!-- Chart.js 라이브러리를 로드합니다. -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart"></canvas>
+    
+    <script>
+        // 차트 데이터를 정의합니다.
+        var test_value = {{ results | tojson | safe }};
+        var data = {
+            labels: ["데이터1", "데이터2", "데이터3"],
+            datasets: [
+                {
+                    label: '차트 제목',
+                    data: [10, 20, test_value],
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // 차트를 그립니다.
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data
+        });
+    </script>
+</body>
+</html>
